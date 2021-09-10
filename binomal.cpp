@@ -1,5 +1,5 @@
 size_t Binomial(int n, int k) {
-	if(n <= k || n < 0 || k < 0)
+	if(n <= k || n <= 0 || k <= 0)
 		return 1;
 	
 	size_t* pascalNthGrid = new size_t[++n];
