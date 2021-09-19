@@ -1,3 +1,7 @@
+/*****************************************************
+Returning the value of (n, k) BINOMIAL COEFFICIENT
+******************************************************/
+
 size_t Binomial(int n, int k) {
 	if(n <= k || n <= 0 || k <= 0)
 		return 1;
