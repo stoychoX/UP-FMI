@@ -1,4 +1,5 @@
 //more actions to be added soon
+//not done fully, not tested fully
 
 void rotate(char* result, int resMaxSize) {
 	for (int i = 0; i < resMaxSize / 2; i++) {
@@ -57,7 +58,7 @@ char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 }
 
 //argOne - argTwo = result;
-const char* subtractCharNumber(const char* argOne, const char* argTwo) {
+char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	int carry = 0;
 
 	int minSize = strlen(argOne) < strlen(argTwo) ? strlen(argOne) : strlen(argTwo);
@@ -92,11 +93,15 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 
 	if (maxSize != strlen(argOne)) {
 		int size = strlen(result);
-		char* nResult = new char[size + 1];
+		char* nResult = new char[size + 2];
 		nResult[0] = '-';
-		for (int i = 0; i <= size; i++)
+
+		for (int i = 0; i < size; i++)
 			nResult[i + 1] = result[i];
+
+		nResult[size + 1] = '\0';//fixed
 		delete[] result;
+
 		return nResult;
 	}
 	return result;
@@ -116,7 +121,7 @@ char* addSign(char* toRemove) {
 	return toReturn;
 }
 
-const char* multiplyCharNumbers(const char* argOne, const char* argTwo) {
+char* multiplyCharNumbers(const char* argOne, const char* argTwo) {
 	int carry = 0;
 	int rNum = 0;
 	bool signFirst = (argOne[0] == '-');
@@ -155,7 +160,11 @@ const char* multiplyCharNumbers(const char* argOne, const char* argTwo) {
 	result[0] = '0';
 	result[1] = '\0';
 
-	for (int i = 0; i < lenOne; i++) result = sumCharRepresentedNumber(result, results[i]);
+	for (int i = 0; i < lenOne; i++) {
+		char* c = sumCharRepresentedNumber(result, results[i]);
+		delete[] result;
+		result = c;
+	}
 
 	for (int i = 0; i < lenOne; i++) delete[] results[i];
 	delete[] results;
