@@ -17,7 +17,7 @@ char* removeFrontZero(char* toRemove) {
 	return result;
 }
 
-const char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
+char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 	int carry = 0;
 
 	int resMinSize = strlen(argOne) < strlen(argTwo) ? strlen(argOne) : strlen(argTwo);
@@ -25,10 +25,10 @@ const char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 
 	const char* maxPtr;
 	const char* minPtr;
-	char* result = new char[resMaxSize + 1];
+	char* result = new char[resMaxSize + 2];
 
 	if (resMaxSize == strlen(argOne)) { maxPtr = argOne; minPtr = argTwo; }
-				     else { maxPtr = argTwo; minPtr = argOne; }
+	else { maxPtr = argTwo; minPtr = argOne; }
 
 	for (int i = 0; i < resMinSize; i++) {
 		int number = (minPtr[resMinSize - i - 1] - '0') + //first digit fo first number
@@ -41,13 +41,16 @@ const char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 
 	for (int i = resMinSize; i < resMaxSize; i++) {
 		int number = ((maxPtr[resMaxSize - i - 1]) - '0') //next digit from the greatest number
-			     + carry;
+			+ carry;
 
 		carry = number / 10;
 		result[i] = number % 10 + '0';
 	}
 
-	rotate(result, resMaxSize);
+	if (carry)
+		result[resMaxSize] = carry + '0';
+
+	rotate(result, resMaxSize + !!(carry));
 	result[resMaxSize + !!(carry)] = '\0';
 
 	return result;
