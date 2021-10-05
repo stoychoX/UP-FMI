@@ -101,3 +101,48 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	}
 	return result;
 }
+
+const char* multiplyCharNumbers(const char* argOne, const char* argTwo) {
+	int carry = 0;
+	int rNum = 0;
+
+	int lenOne = strlen(argOne);
+	int lenTwo = strlen(argTwo);
+
+	char** results = new char* [lenOne];
+
+	for (int i = 0; i < lenOne; i++)
+		results[i] = new char[lenTwo + lenOne + 1];
+
+	for (int i = 0; i < lenOne; i++) {
+		int firstNumber = argOne[lenOne - i - 1] - '0';
+		carry = 0;
+		for (int j = 0; j < i; j++)
+			results[i][j] = '0';
+
+		for (int j = 0; j < lenTwo; j++) {
+			int secondNumber = argTwo[lenTwo - j - 1] - '0';
+			rNum = firstNumber * secondNumber + carry;
+			carry = rNum / 10;
+			results[i][j + i] = rNum % 10 + '0';
+		}
+
+		if (carry)
+			results[i][lenTwo + i] = carry + '0';
+
+		results[i][lenTwo + i + !!(carry)] = '\0';
+	}
+
+	for (int i = 0; i < lenOne; i++) rotate(results[i], strlen(results[i]));
+
+	char* result = new char[2];
+	result[0] = '0';
+	result[1] = '\0';
+
+	for (int i = 0; i < lenOne; i++) result = sumCharRepresentedNumber(result, results[i]);
+
+	for (int i = 0; i < lenOne; i++) delete[] results[i];
+	delete[] results;
+
+	return result;
+}
