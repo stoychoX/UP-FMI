@@ -9,14 +9,11 @@ void rotate(char* result, int resMaxSize) {
 }
 
 char* removeFrontZero(char* toRemove) {
-	if (toRemove[0] != '0')
-		return toRemove;
-	
 	char* result = new char[strlen(toRemove)];
 	int size = strlen(toRemove);
 	for (int i = 0; i < size; i++)
 		result[i] = toRemove[i + 1];
-	
+
 	delete[] toRemove;
 	return result;
 }
@@ -67,6 +64,8 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	const char* minArg = strlen(argOne) < strlen(argTwo) ? argOne : argTwo;
 	const char* maxArg = strlen(argOne) > strlen(argTwo) ? argOne : argTwo;
 
+	if (minSize == maxSize) { maxArg = argOne; minArg = argTwo; }
+
 	char* result = new char[maxSize + 1];
 
 	for (int i = 0; i < minSize; i++) {
@@ -84,13 +83,15 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	}
 
 	rotate(result, maxSize);
+
 	result[maxSize + !!(carry)] = '\0';
-	result = removeFrontZero(result);
+	while (result[0] == '0')
+		result = removeFrontZero(result);
 
 	if (maxSize != strlen(argOne)) {
 		int size = strlen(result);
 		char* nResult = new char[size + 1];
-		nResult[0] = '-';		
+		nResult[0] = '-';
 		for (int i = 0; i <= size; i++)
 			nResult[i + 1] = result[i];
 		delete[] result;
