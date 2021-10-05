@@ -87,7 +87,7 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	result[maxSize + !!(carry)] = '\0';
 	result = removeFrontZero(result);
 
-	if (maxSize != strlen(argOne) && maxSize != minSize) {
+	if (maxSize != strlen(argOne)) {
 		int size = strlen(result);
 		char* nResult = new char[size + 1];
 		nResult[0] = '-';		
