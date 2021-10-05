@@ -21,9 +21,6 @@ char* removeFrontZero(char* toRemove) {
 	return result;
 }
 
-
-
-
 const char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 	int carry = 0;
 
@@ -35,7 +32,7 @@ const char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 	char* result = new char[resMaxSize + 1];
 
 	if (resMaxSize == strlen(argOne)) { maxPtr = argOne; minPtr = argTwo; }
-								 else { maxPtr = argTwo; minPtr = argOne; }
+				     else { maxPtr = argTwo; minPtr = argOne; }
 
 	for (int i = 0; i < resMinSize; i++) {
 		int number = (minPtr[resMinSize - i - 1] - '0') + //first digit fo first number
@@ -48,7 +45,7 @@ const char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 
 	for (int i = resMinSize; i < resMaxSize; i++) {
 		int number = ((maxPtr[resMaxSize - i - 1]) - '0') //next digit from the greatest number
-					 + carry;
+			     + carry;
 
 		carry = number / 10;
 		result[i] = number % 10 + '0';
@@ -93,12 +90,9 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	if (maxSize != strlen(argOne) && maxSize != minSize) {
 		int size = strlen(result);
 		char* nResult = new char[size + 1];
-		nResult[0] = '-';
-
-		
+		nResult[0] = '-';		
 		for (int i = 0; i <= size; i++)
 			nResult[i + 1] = result[i];
-		
 		delete[] result;
 		return nResult;
 	}
