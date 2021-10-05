@@ -13,7 +13,6 @@ char* removeFrontZero(char* toRemove) {
 	int size = strlen(toRemove);
 	for (int i = 0; i < size; i++)
 		result[i] = toRemove[i + 1];
-
 	delete[] toRemove;
 	return result;
 }
@@ -97,6 +96,5 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 		delete[] result;
 		return nResult;
 	}
-
 	return result;
 }
