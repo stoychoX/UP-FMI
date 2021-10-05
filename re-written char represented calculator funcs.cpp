@@ -102,12 +102,28 @@ const char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	return result;
 }
 
+char* addSign(char* toRemove) {
+	int size = strlen(toRemove);
+	char* toReturn = new char[size + 2];
+	toReturn[0] = '-';
+
+	for (int i = 0; i < size; i++)
+		toReturn[i + 1] = toRemove[i];
+
+	toReturn[size + 1] = '\0';
+
+	delete[] toRemove;
+	return toReturn;
+}
+
 const char* multiplyCharNumbers(const char* argOne, const char* argTwo) {
 	int carry = 0;
 	int rNum = 0;
+	bool signFirst = (argOne[0] == '-');
+	bool signSecond = (argTwo[0] == '-');
 
-	int lenOne = strlen(argOne);
-	int lenTwo = strlen(argTwo);
+	int lenOne = strlen(argOne) - signFirst;
+	int lenTwo = strlen(argTwo) - signSecond;
 
 	char** results = new char* [lenOne];
 
@@ -115,13 +131,13 @@ const char* multiplyCharNumbers(const char* argOne, const char* argTwo) {
 		results[i] = new char[lenTwo + lenOne + 1];
 
 	for (int i = 0; i < lenOne; i++) {
-		int firstNumber = argOne[lenOne - i - 1] - '0';
+		int firstNumber = argOne[lenOne - i - 1 + signFirst] - '0';
 		carry = 0;
 		for (int j = 0; j < i; j++)
 			results[i][j] = '0';
 
 		for (int j = 0; j < lenTwo; j++) {
-			int secondNumber = argTwo[lenTwo - j - 1] - '0';
+			int secondNumber = argTwo[lenTwo - j - 1 + signSecond] - '0';
 			rNum = firstNumber * secondNumber + carry;
 			carry = rNum / 10;
 			results[i][j + i] = rNum % 10 + '0';
@@ -143,6 +159,9 @@ const char* multiplyCharNumbers(const char* argOne, const char* argTwo) {
 
 	for (int i = 0; i < lenOne; i++) delete[] results[i];
 	delete[] results;
+
+	if (signFirst ^ signSecond)
+		result = addSign(result);
 
 	return result;
 }
