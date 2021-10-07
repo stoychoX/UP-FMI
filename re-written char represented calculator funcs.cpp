@@ -49,9 +49,8 @@ char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 		carry = number / 10;
 		result[i] = number % 10 + '0';
 	}
-
-	if (carry)
-		result[resMaxSize] = carry + '0';
+	
+	result[resMaxSize + !!(carry)] = carry + '0';
 
 	rotate(result, resMaxSize + !!(carry));
 	result[resMaxSize + !!(carry)] = '\0';
