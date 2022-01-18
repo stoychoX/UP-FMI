@@ -1,0 +1,1 @@
+# Tasks written by me while taking the introduction to programming course at FMI sofia
