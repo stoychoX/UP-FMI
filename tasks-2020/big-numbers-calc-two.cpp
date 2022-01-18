@@ -2,6 +2,7 @@
 //more actions to be added soon
 //not done fully, not tested fully
 //Example: char* result = sumCharRepresentedNumber("1123121", "7965879458"); (...) delete[] result;
+#include<cstring>
 
 void rotate(char* result, int resMaxSize) {
 	for (int i = 0; i < resMaxSize / 2; i++) {

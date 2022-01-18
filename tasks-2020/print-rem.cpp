@@ -74,7 +74,6 @@ void printRem(int number, int div) {
 }
 
 int main() {
-	//not enough tests yet!
 	printRem(0, 30);
 	printRem(1, 30);
 	printRem(1, 0);
