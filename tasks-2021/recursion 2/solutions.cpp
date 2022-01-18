@@ -33,7 +33,6 @@ size_t replaceEveryFiveWithEight(size_t number) {
 		return 10 * replaceEveryFiveWithEight(number / 10) + 8;
 
 	return 10 * replaceEveryFiveWithEight(number / 10) + lastDigit;
-	// 12 * 10 + 8
 }
 
 // task four

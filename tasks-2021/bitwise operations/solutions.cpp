@@ -1,3 +1,5 @@
+#include<iostream>
+
 void getBitwiseRepresentation(int n) {
 	for (int i = 31; i >= 0; --i)
 		std::cout << ((n & (1 << i)) != 0);

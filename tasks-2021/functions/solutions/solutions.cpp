@@ -40,7 +40,6 @@ bool isNumber(char n) {
 	return (n >= '0' && n <= '9');
 }
 
-//Защо това работи?
 int f(int a, int b) {
 	return (a + b) * (a + b + 1) / 2 + b;
 }
@@ -60,5 +59,5 @@ void play() {
 }
 
 int main() {
-	//(...)
+	
 }
