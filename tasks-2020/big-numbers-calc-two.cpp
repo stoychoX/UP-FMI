@@ -66,12 +66,15 @@ char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 //argOne - argTwo = result;
 char* subtractCharNumber(const char* argOne, const char* argTwo) {
 	int carry = 0;
+	
+	int lenOne = strlen(argOne);
+	int lenTwo = strlen(argTwo);
+	
+	int minSize = lenOne < lenTwo ? lenOne : lenTwo;
+	int maxSize = lenOne > lenTwo ? lenOne : lenTwo;
 
-	int minSize = strlen(argOne) < strlen(argTwo) ? strlen(argOne) : strlen(argTwo);
-	int maxSize = strlen(argOne) > strlen(argTwo) ? strlen(argOne) : strlen(argTwo);
-
-	const char* minArg = strlen(argOne) < strlen(argTwo) ? argOne : argTwo;
-	const char* maxArg = strlen(argOne) > strlen(argTwo) ? argOne : argTwo;
+	const char* minArg = lenOne < lenTwo ? argOne : argTwo;
+	const char* maxArg = lenOne > lenTwo ? argOne : argTwo;
 
 	if (minSize == maxSize) { maxArg = argOne; minArg = argTwo; }
 
