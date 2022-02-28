@@ -24,14 +24,17 @@ char* removeFrontZero(char* toRemove) {
 char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 	int carry = 0;
 
-	int resMinSize = strlen(argOne) < strlen(argTwo) ? strlen(argOne) : strlen(argTwo);
-	int resMaxSize = strlen(argOne) > strlen(argTwo) ? strlen(argOne) : strlen(argTwo);
+	int lenOne = strlen(argOne);
+	int lenTwo = strlen(argTwo);
+
+	int resMinSize = lenOne < lenTwo ? lenOne : lenTwo;
+	int resMaxSize = lenOne > lenTwo ? lenOne : lenTwo;
 
 	const char* maxPtr;
 	const char* minPtr;
 	char* result = new char[resMaxSize + 2];
 
-	if (resMaxSize == strlen(argOne)) { maxPtr = argOne; minPtr = argTwo; }
+	if (resMaxSize == lenOne) { maxPtr = argOne; minPtr = argTwo; }
 	else { maxPtr = argTwo; minPtr = argOne; }
 
 	for (int i = 0; i < resMinSize; i++) {
@@ -50,8 +53,8 @@ char* sumCharRepresentedNumber(const char* argOne, const char* argTwo) {
 		carry = number / 10;
 		result[i] = number % 10 + '0';
 	}
-	
-	if(carry)
+
+	if (carry)
 		result[resMaxSize] = carry + '0';
 
 	rotate(result, resMaxSize + !!(carry));
